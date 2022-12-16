@@ -1,0 +1,9 @@
+<% if @user.errors.messages.any? %>
+  <ul id="error_explanation">
+    <% @user.errors.full_messages.each do |m| %>
+      <% if m.match?(locals[:find_error_for])  %>
+        <li><%= m %></li>
+      <% end %>
+    <% end %>
+  </ul>
+<% end %>
