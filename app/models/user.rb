@@ -9,4 +9,11 @@ class User < ApplicationRecord
   validates :password, length: {minimum: 7}#, format: {with:VALID_PASSWORD}
   validates_format_of :password , with:VALID_PASSWORD,
                       :message => "must be have at least one capital char, one little char, digits and special symbols"
+  # Возвращает дайджест для указанной строки.
+  def User.digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ?
+             BCrypt::Engine::MIN_COST :
+             BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost)
+  end
 end

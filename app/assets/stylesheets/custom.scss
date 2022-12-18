@@ -1,5 +1,4 @@
-@import 'bootstrap';
-
+@import "bootstrap";
 /* примеси, переменные и пр.*/
 $gray-medium-light: #eaeaea;
 @mixin box_sizing {
@@ -51,6 +50,17 @@ p {
 
 .nav-item{
   margin: 0 10px;
+}
+.dropdown-menu{
+  li {
+    margin-left: 10px;
+    a{
+    &:hover{
+      color: #730E15;
+      font-weight:bold;
+    }}
+  }
+
 }
 /* заголовок */
 #logo {
@@ -154,4 +164,5 @@ input, textarea, select, .uneditable-input {
   .form-control {
     color: darkred;
   }
+
 }

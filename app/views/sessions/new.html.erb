@@ -1,0 +1,17 @@
+<% provide(:title, "Login") %>
+<h1>Login</h1>
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <%= form_for :session, url: login_path do |t| %>
+      <!--%= render 'shared/error_messages' %-->
+      <%= t.label :email %>
+      <%= t.text_field :email, autofocus: true, class: "form-control" %>
+      <!--%= render 'shared/error_message_item', locals:{find_error_for:/\AEmail/}%-->
+      <%= t.label :password %>
+      <%= t.password_field :password, class: "form-control" %>
+      <!--%= render 'shared/error_message_item', locals:{find_error_for:/\APassword (must|is|can't)/}%-->
+      <%= t.submit "Login", class:"btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
+

@@ -1,3 +1,4 @@
+
 <header class="navbar  navbar-dark bg-dark fixed-top p-0">
 <div class="container-fluid">
     <%=link_to "sample app", root_path, id: "logo", class: "navbar-brand "%>
@@ -6,7 +7,22 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item "><%=link_to "HOME", home_path %></li>
           <li class="nav-item "><%=link_to "HELP", help_path %></li>
-          <li class="nav-item "><%=link_to "LOG IN", "#" %></li>
+          <% if logged_in? %>
+            <li class="nav-item"><%=link_to "USERS", '#' %></li>
+            <li class="nav-item  dropdown">
+                <a href="#" class="nav-item dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                  Account<b class="bi bi-person"></b>
+                </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "Profile", current_user %></li>
+                <li><%= link_to "Settings","#" %></li>
+                <li class="dropdown-divider"></li>
+                <li><%= link_to "LOG OUT", logout_path, method: "delete" %></li>
+              </ul>
+            </li>
+          <% else %>
+              <li><%=link_to "LOG IN", login_path %></li>
+          <% end %>
         </ul>
       </div>
     </nav>
