@@ -2,7 +2,7 @@
 //import "@hotwired/turbo-rails"
 //import "controllers"
 //import "rails-ujs"
-require("@rails/ujs").start()
+//require("@rails/ujs").start()
 //require jquery
 //require jquery_ujs
 //require bootstrap
