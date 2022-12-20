@@ -13,7 +13,7 @@ module SessionsHelper
   end
   # Осуществляет выход текущего пользователя.
   def log_out
-    debugger
+    #debugger
     session.delete[:user_id]
     @current_user = nil
   end

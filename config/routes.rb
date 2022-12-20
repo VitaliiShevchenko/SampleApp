@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   get 'login' => "sessions#new"
   post 'login' => "sessions#create"
-  get 'logout' => "sessions#destroy"
+  delete 'logout' => "sessions#destroy" #when put GET to pass but error on def log_out
 
   root 'static_pages#home'
 

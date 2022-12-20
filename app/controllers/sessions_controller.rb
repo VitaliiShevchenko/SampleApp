@@ -7,6 +7,7 @@
   end
 
   def destroy
+    #debugger
     log_out
     redirect_to root_url
   end
