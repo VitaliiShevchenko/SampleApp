@@ -23,6 +23,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    debugger
+  end
+
   private
 
   def user_params
