@@ -1,11 +1,11 @@
 module SessionsHelper
-  def log_in user
-    session[:user_id] = user.id
+  def log_in(user)
+    session[:current_user_id] = user.id
   end
 
-  # Поиск текущего Пользователя в сеансе
+  # Поиск текущего Пользователя в сеансе` `
   def current_user
-    current_user ||= User.find_by(id: session[:user_id])
+    @current_user ||= User.find_by(id: session[:current_user_id])
   end
 
   def logged_in?
@@ -13,7 +13,8 @@ module SessionsHelper
   end
 end
 def log_out
-  session.delete(:current_user)
+  #debugger
+  session.delete(:current_user_id)
   @current_user = nil
 end
 

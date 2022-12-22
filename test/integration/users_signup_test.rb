@@ -44,5 +44,6 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     assert_select "div", "User was successfully created."
     assert_select "div", "Welcome to the Sample App!"
     assert_not flash[:danger]
+    assert is_logged_in?
   end
 end
