@@ -8,13 +8,14 @@
 
   def destroy
     #debugger
-    log_out
+    log_out if logged_in?
     redirect_to root_url
   end
 
   def create
     user = User.find_by(email: params[:session][:email])
     if user &.authenticate(params[:session][:password])
+      log_in user
       remember user
       flash[:notice] = "Welcome to our site"
      redirect_to user
