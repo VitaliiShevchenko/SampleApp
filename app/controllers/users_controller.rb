@@ -1,12 +1,16 @@
 class UsersController < ApplicationController
+
   def new
     @user = User.new
   end
   def show
     #console
     #logger.warn "Processing the request..."
-    @user = User.find(params[:id])
-    #logger.fatal "Terminating application, raised unrecoverable error!!!"
+    @user = current_user
+    if @user.nil?
+      render :new
+      #logger.fatal "Terminating application, raised unrecoverable error!!!"
+    end
     #debugger
   end
   def create
