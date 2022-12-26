@@ -5,13 +5,8 @@ module SessionsHelper
   # Запоминает пользователя в постоянном сеансе.
   def remember(user)
     user.remember
-    if params[:session][:remember_me] === "1"
     cookies.permanent.signed[:current_user_id] = user.id
     cookies.permanent[:remember_token] = user.remember_token
-    else
-      cookies.signed[:current_user_id] = user.id
-      cookies[:remember_token] = user.remember_token
-      end
   end
 
   # Возвращает пользователя, соответствующего токену в cookie.

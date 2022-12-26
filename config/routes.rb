@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'static_pages#home'
 
+
   get 'home' => 'static_pages#home'
   get 'help' => 'static_pages#help'
   get 'about' => 'static_pages#about'
@@ -13,7 +14,7 @@ Rails.application.routes.draw do
 
   resources :users
 
-
+  get '*path', to: 'static_pages#home'
 
 
 
