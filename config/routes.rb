@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'static_pages#home'
+
 
 
   get 'home' => 'static_pages#home'
@@ -10,12 +10,13 @@ Rails.application.routes.draw do
 
   get 'login' => "sessions#new"
   post 'login' => "sessions#create"
-  delete 'logout' => "sessions#destroy"
+  delete 'logout' => "sessions#destroy" #when put GET to pass but error on def log_out
+
 
   resources :users
+  root 'static_pages#home'
 
   get '*path', to: 'static_pages#home'
-
 
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

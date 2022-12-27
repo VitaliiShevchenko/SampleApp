@@ -4,6 +4,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
   def setup
     @user = users(:vitalii)
   end
+
   test "login with invalid information" do
     get login_path
     assert_template 'sessions/new'
@@ -54,4 +55,5 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     log_in_as(@user, remember_me: '0')
     assert_nil cookies['remember_token']
   end
+
 end

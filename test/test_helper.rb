@@ -29,5 +29,6 @@ class ActiveSupport::TestCase
   # Возвращает true внутри интеграционного теста.
   def integration_test?
     defined?(post_via_redirect)
+
   end
 end
