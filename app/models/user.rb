@@ -11,9 +11,9 @@ class User < ApplicationRecord
   validates_format_of :password , with:VALID_PASSWORD,
                       :message => "must be have at least one capital char, one little char, digits and special symbols"
   before_create { generate_token(:auth_token) }
-
+  class << self
   # Возвращает дайджест для указанной строки.
-  def User.digest(string)
+  def digest(string)
     cost = ActiveModel::SecurePassword.min_cost ?
              BCrypt::Engine::MIN_COST :
              BCrypt::Engine.cost
@@ -25,8 +25,15 @@ class User < ApplicationRecord
     end while User.exists?(column => self[column])
   end
   # Возвращает случайный токен.
-  def User.new_token
+  def new_token
     SecureRandom.urlsafe_base64
+  end
+  end
+  # Возвращает случайный токен.
+  def generate_token(column)
+    begin
+      self[column]= SecureRandom.urlsafe_base64
+    end while User.exists?(column => self[column])
   end
   # Запоминает пользователя в базе данных для использования в постоянных сеансах.
   def  remember
