@@ -37,4 +37,32 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
     get users_path
     assert_select 'a', text: 'delete', count: 0
   end
+  test "should be links for un-logged users" do
+    get root_path
+    assert_template 'static_pages/home'
+    assert_select "a[href=?]", root_path
+    assert_select "a[href=?]", help_path
+    assert_select "a[href=?]", about_path
+    assert_select "a[href=?]", contact_path
+    assert_select "a[href=?]", login_path
+    assert_select "a[href=?]", sign_up_path
+    assert_select "a[href=?]", home_path
+    assert_not_includes "a[href=?]", users_path
+  end
+  test "should be links for the logged users" do
+    log_in_as(@user)
+    get root_path
+    assert_template 'static_pages/home'
+    assert_select "a[href=?]", root_path
+    assert_select "a[href=?]", help_path
+    assert_select "a[href=?]", about_path
+    assert_select "a[href=?]", contact_path
+    assert_not_includes "a[href=?]", login_path
+    assert_select "a[href=?]", sign_up_path
+    assert_select "a[href=?]", home_path
+    assert_select "a[href=?]", users_path
+    assert_select "a[href=?]", user_path(@user)
+    assert_select "a[href=?]", edit_user_path(@user)
+    assert_select "a[href=?]", logout_path
+  end
 end

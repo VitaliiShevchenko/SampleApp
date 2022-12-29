@@ -4,6 +4,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   def setup
     @user = users(:vitalii)
     @other_user = users(:archer)
+    @admin  = users(:vitalii)
   end
   test "should get new" do
     get sign_up_path
@@ -56,5 +57,15 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
       delete user_path id: @user
     end
     assert_redirected_to root_url
+  end
+  test "should be friendly redirect after login" do
+  get users_path 80
+  assert_equal users_url(80), session[:forwarding_url]
+  assert_redirected_to login_path
+  log_in_as(@user)
+  assert_redirected_to users_path 80
+  log_in_as(@user)
+  assert_redirected_to @user
+  assert_equal session[:forwarding_url], nil
   end
 end
