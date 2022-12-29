@@ -7,7 +7,7 @@ class User < ApplicationRecord
           uniqueness: { case_sensitive: false }
   has_secure_password
   VALID_PASSWORD =  /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_+])[A-Za-z\d\W_+]{7,72}/
-  validates :password, length: {minimum: 7}#, format: {with:VALID_PASSWORD}
+  validates :password, length: {minimum: 7}, allow_nil: true #, format: {with:VALID_PASSWORD}
   validates_format_of :password , with:VALID_PASSWORD,
                       :message => "must be have at least one capital char, one little char, digits and special symbols"
   before_create { generate_token(:auth_token) }
@@ -49,4 +49,5 @@ class User < ApplicationRecord
   def forget
     update_attribute(:remember_digest, nil)
   end
+
 end

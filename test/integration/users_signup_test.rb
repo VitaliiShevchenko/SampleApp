@@ -36,8 +36,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
                                       password: "fo1AS@#",
                                       password_confirmation: "fo1AS@#" }}
 
-      follow_redirect!
-
+    follow_redirect!
     end
     assert_template 'users/show'
     assert_select "div:match('class', ?)", /\Aalert alert-success/
