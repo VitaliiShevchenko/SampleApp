@@ -5,7 +5,14 @@ class UsersController < ApplicationController
 
 
   def index
-    @users = User.paginate(page: params[:page])#order(:name).page params[:page]
+    if !!params[:asc]
+     @users = User.paginate(page: params[:page])
+     sort false
+    else
+      @users = User.order(:name).paginate(page: params[:page])
+      sort true
+    end
+
   end
   def new
     @user = User.new
@@ -24,9 +31,10 @@ class UsersController < ApplicationController
     @user = User.new user_params
     respond_to do |format|
       if @user.save
-        log_in @user
-        flash[:success] = "Welcome to the Sample App!"
-        format.html { redirect_to user_url(@user), notice: "User was successfully created." }
+        @user.send_activation_email
+        #UserMailer.account_activation(@user).deliver_now
+        flash[:info] = "Please check your email to activate your account."
+        format.html { redirect_to root_url }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -69,6 +77,7 @@ class UsersController < ApplicationController
   end
 
 
+
   private
 
   def user_params
@@ -91,4 +100,5 @@ class UsersController < ApplicationController
   def admin_user
     redirect_to(root_url) unless current_user.admin?
   end
+
 end

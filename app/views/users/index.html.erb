@@ -2,9 +2,12 @@
 <h1>All users</h1>
 <div class="digg_pagination">
   <div class="page_info">
-    <%= page_entries_info @posts %>
+    <%= page_entries_info @users %>
   </div>
+  <%= link_to "#{@asc ? 'Without ' : 'ASC '}Sort",  users_path(asc: @asc) %>
+  <h2><%= @asc %></h2>
 <%= will_paginate @users %>
+
 
 <ul class="users">
     <%= render @users %>

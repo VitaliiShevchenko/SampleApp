@@ -1,6 +1,8 @@
 class User < ApplicationRecord
-  attr_accessor :remember_token
+  attr_accessor :remember_token, :activation_token
   before_save { email.downcase }
+  before_create :create_activation_digest
+
   validates :name, presence: true, length: {minimum: 2, maximum: 50}
   VALID_EMAIL = /\A[a-zA-Z0-9.!\\#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-\\.]{0,61}|[a-zA-Z0-9])(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)(\\.|[a-zA-Z0-9-])*\z/
   validates :email, presence: true, length: {maximum: 255}, format: {with: VALID_EMAIL},
@@ -10,8 +12,10 @@ class User < ApplicationRecord
   validates :password, length: {minimum: 7}, allow_nil: true #, format: {with:VALID_PASSWORD}
   validates_format_of :password , with:VALID_PASSWORD,
                       :message => "must be have at least one capital char, one little char, digits and special symbols"
-  before_create { generate_token(:auth_token) }
+
+
   class << self
+
   # Возвращает дайджест для указанной строки.
   def digest(string)
     cost = ActiveModel::SecurePassword.min_cost ?
@@ -41,13 +45,35 @@ class User < ApplicationRecord
       update_attribute(:remember_digest, User.digest(remember_token))
   end
   # Возвращает true, если указанный токен соответствует дайджесту.
-  def authenticated?(remember_token)
-    return false if remember_digest.nil?
-    BCrypt::Password.new(remember_digest).is_password?(remember_token)
+  def authenticated?(attribute, token)
+    digest = send("#{attribute}_digest")
+    return false if digest.nil?
+    BCrypt::Password.new(digest).is_password?(token)
   end
   # Забывает пользователя
   def forget
     update_attribute(:remember_digest, nil)
+  end
+
+  # Активирует учетную запись.
+  def activate
+    update_attribute(:activated,             true)
+    update_attribute(:activated_at, Time.zone.now)
+  end
+  # Посылает письмо со ссылкой на страницу активации.
+  def send_activation_email
+    UserMailer.account_activation(self).deliver_now
+  end
+
+  private
+  # Преобразует адрес электронной почты в нижний регистр.
+  def downcase_email
+    self.email = email.downcase
+  end
+  def create_activation_digest
+    # Создать токен и дайджест.
+    self.activation_token = User.new_token
+    self.activation_digest = User.digest(activation_token)
   end
 
 end
