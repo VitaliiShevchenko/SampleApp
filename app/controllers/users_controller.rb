@@ -5,27 +5,21 @@ class UsersController < ApplicationController
 
 
   def index
-    if !!params[:asc]
-     @users = User.paginate(page: params[:page])
-     sort false
-    else
-      @users = User.order(:name).paginate(page: params[:page])
-      sort true
-    end
+    #if !!params[:asc]
+       @users = User.where(activated: true).paginate(page: params[:page])
+    #  sort false
+    # else
+    #   @users = User.order.paginate(page: params[:page]).where(activated: true)
+    #  sort true
+    #end
 
   end
   def new
     @user = User.new
   end
   def show
-    #console
-    #logger.warn "Processing the request..."
     @user = User.find(params[:id])
-    if @user.nil?
-      render :new
-      #logger.fatal "Terminating application, raised unrecoverable error!!!"
-    end
-    #debugger
+    redirect_to root_url and return unless @user.activated
   end
   def create
     @user = User.new user_params
@@ -81,6 +75,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
+
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
   # Validation right of user.

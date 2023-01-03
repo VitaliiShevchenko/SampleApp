@@ -59,4 +59,36 @@ class PasswordResetsTest < ActionDispatch::IntegrationTest
     assert_not flash.empty?
     assert_template 'password_resets/edit'
   end
+
+  test "expired token" do
+    get new_password_reset_path
+    post password_resets_path password_reset: { email: @user.email }
+    @user = assigns(:user)
+    @user.update_attribute(:reset_sent_at, 3.hours.ago)
+    patch password_reset_path(@user.reset_token,
+          email: @user.email,
+          user: { password:
+                    "foobar",
+                  password_confirmation: "foobar" })
+    assert_response :redirect
+    follow_redirect!
+    assert_match /Password reset has expired./i, response.body
+  end
+
+  test "output activated users" do
+    get sign_up_path
+    new_user = {user:{name:" @new_user",
+                     email: "new@user.COM",
+                     password: "Pas$w0rd",
+                     password_confirmation: "Pas$w0rd"}}
+    assert_difference 'User.count', 1 do
+    post users_path params: new_user
+    @new_user  = assigns(:user)
+    end
+    assert_redirected_to root_url
+    follow_redirect!
+    assert_match /Please check your email to activate your account./i, response.body
+
+
+  end
 end
