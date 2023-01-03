@@ -6,6 +6,7 @@
       <%= t.label :email %>
       <%= t.text_field :email, autofocus: true, class: "form-control" %>
       <%= t.label :password %>
+      <%= link_to "(forgot password)", new_password_reset_path %>
       <%= t.password_field :password, class: "form-control" %>
       <%= t.label :remember_me, class: "checkbox inline" do %>
         <%= t.check_box :remember_me %>
