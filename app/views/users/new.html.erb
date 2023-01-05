@@ -4,19 +4,19 @@
   <div class="col-md-6 offset-md-3">
     <% return if @user.nil? %>
   <%= form_for @user do |t| %>
-      <%= render 'shared/error_messages' %>
+      <%= render 'shared/error_messages', object: t.object %>
     <%= t.label :name %>
       <%= t.text_field :name ,  autofocus: true, class: "form-control" %>
-      <%= render 'shared/error_message_item', locals:{find_error_for:/\AName/}%>
+      <%= render 'shared/error_message_item', locals:{find_error_for:/\AName/}, object: t.object %>
       <%= t.label :email %>
       <%= t.text_field :email, class: "form-control" %>
-      <%= render 'shared/error_message_item', locals:{find_error_for:/\AEmail/}%>
+      <%= render 'shared/error_message_item', locals:{find_error_for:/\AEmail/}, object: t.object %>
       <%= t.label :password %>
       <%= t.password_field :password, class: "form-control" %>
-      <%= render 'shared/error_message_item', locals:{find_error_for:/\APassword (must|is|can't)/}%>
+      <%= render 'shared/error_message_item', locals:{find_error_for:/\APassword (must|is|can't)/}, object: t.object %>
       <%= t.label :password_confirmation %>
       <%= t.password_field :password_confirmation, class: "form-control" %>
-      <%= render 'shared/error_message_item', locals:{find_error_for:/\APassword confirmation/}%>
+      <%= render 'shared/error_message_item', locals:{find_error_for:/\APassword confirmation/}, object: t.object %>
       <%= t.submit "Create my account", class:"btn btn-primary" %>
     <% end %>
   </div>

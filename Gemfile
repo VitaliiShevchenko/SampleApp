@@ -48,6 +48,11 @@ gem 'faker', '>=1.4.2'
 # For viewing definitely number of user on the page
 gem 'will_paginate', '>= 3.0.7'
 
+# for uploading image
+gem 'carrierwave', '>= 3.0.0.beta', '< 4.0'
+gem "mini_magick", ">= 3.6.0"
+gem  'fog', '1.36.0'
+
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]

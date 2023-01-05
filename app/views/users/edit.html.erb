@@ -4,19 +4,19 @@
 <div class="row">
   <div class="col-md-6 offset-md-3">
     <%= form_for @user do |f| %>
-      <%= render 'shared/error_messages' %>
+      <%= render 'shared/error_messages', object: f.object %>
       <%= f.label :name %>
       <%= f.text_field :name, class: 'form-control' %>
-      <%= render 'shared/error_message_item', locals:{find_error_for:/\AName/}%>
+      <%= render 'shared/error_message_item', locals:{find_error_for:/\AName/}, object: f.object %>
       <%= f.label :email %>
       <%= f.email_field :email, class: 'form-control' %>
-      <%= render 'shared/error_message_item', locals:{find_error_for:/\AEmail/}%>
+      <%= render 'shared/error_message_item', locals:{find_error_for:/\AEmail/}, object: f.object %>
       <%= f.label :password %>
       <%= f.password_field :password, class: 'form-control' %>
-      <%= render 'shared/error_message_item', locals:{find_error_for:/\APassword (must|is|can't)/}%>
+      <%= render 'shared/error_message_item', locals:{find_error_for:/\APassword (must|is|can't)/}, object: f.object %>
       <%= f.label :password_confirmation, "Confirmation" %>
       <%= f.password_field :password_confirmation, class: 'form-control' %>
-      <%= render 'shared/error_message_item', locals:{find_error_for:/\APassword confirmation/}%>
+      <%= render 'shared/error_message_item', locals:{find_error_for:/\APassword confirmation/}, object: f.object %>
       <%= f.submit "Save changes", class: "btn btn-primary" %>
     <% end %>
     <div class="gravatar_edit">

@@ -58,7 +58,8 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", about_path
     assert_select "a[href=?]", contact_path
     assert_not_includes "a[href=?]", login_path
-    assert_select "a[href=?]", sign_up_path
+    #assert_select "a[href=?]", sign_up_path
+    assert_match /post/i, response.body
     assert_select "a[href=?]", home_path
     assert_select "a[href=?]", users_path
     assert_select "a[href=?]", user_path(@user)

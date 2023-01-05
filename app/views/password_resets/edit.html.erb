@@ -3,14 +3,14 @@
 <div class="row">
   <div class="col-md-6 offset-md-3">
     <%= form_for(@user, url: password_reset_path(params[:id])) do |f| %>
-      <%= render 'shared/error_messages' %>
+      <%= render 'shared/error_messages' , object: f.object%>
       <%= hidden_field_tag :email, @user.email %>
       <%= f.label :password %>
       <%= f.password_field :password, class: 'form-control' %>
       <%= f.label :password_confirmation, "Confirmation" %>
-      <%= render 'shared/error_message_item', locals:{find_error_for:/\APassword (must|is|can't)/}%>
+      <%= render 'shared/error_message_item', locals:{find_error_for:/\APassword (must|is|can't)/}, object: f.object %>
       <%= f.password_field :password_confirmation, class: 'form-control' %>
-      <%= render 'shared/error_message_item', locals:{find_error_for:/\APassword confirmation/}%>
+      <%= render 'shared/error_message_item', locals:{find_error_for:/\APassword confirmation/}, object: f.object %>
       <%= f.submit "Update password", class: "btn btn-primary" %>
     <% end %>
   </div>
