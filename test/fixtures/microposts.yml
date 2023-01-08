@@ -31,7 +31,10 @@ zone:
   created_at: <%= 3.days.ago %>
   user: archer
 
-
+about:
+  content: "Danger zone!"
+  created_at: <%= 3.days.ago %>
+  user: mallory
 
 <% 30.times do |n| %>
 micropost_<%= n %>:
