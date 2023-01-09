@@ -404,6 +404,7 @@ DEPENDENCIES
   debug
   faker (>= 1.4.2)
   fog (= 1.36.0)
+  image_processing (~> 1.2)
   importmap-rails
   jbuilder
   jquery-rails
