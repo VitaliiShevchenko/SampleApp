@@ -8,7 +8,7 @@
 // import "rails-ujs"
 //require("@rails/ujs").start()
 //import  "jquery3"
-//require jquery
+import "jquery"
 //require jquery_ujs
 //require bootstrap
 //require turbolinks
