@@ -14,7 +14,7 @@ class User < ApplicationRecord
   before_create :create_activation_digest
 
   validates :name, presence: true, length: {minimum: 2, maximum: 50}
-  VALID_EMAIL = /\A[a-zA-Z0-9.!\\#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-\\.]{0,61}|[a-zA-Z0-9])(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)(\\.|[a-zA-Z0-9-])*\z/
+  VALID_EMAIL = /\A[a-zA-Z0-9.!\\#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9- \\.]{0,61}|[a-zA-Z0-9])(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)(\\.|[a-zA-Z0-9-])*\z/
   validates :email, presence: true, length: {maximum: 255}, format: {with: VALID_EMAIL},
           uniqueness: { case_sensitive: false }
   has_secure_password
