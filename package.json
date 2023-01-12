@@ -18,8 +18,9 @@
   },
   "homepage": "https://github.com/VitaliiShevchenko/SampleApp#readme",
   "dependencies": {
+    "@rails/ujs": "7.0.4",
     "bootstrap": "^5.2.3",
     "jquery": "^3.6.3",
-    "@rails/ujs": "7.0.4"
+    "popper": "^1.0.1"
   }
 }
