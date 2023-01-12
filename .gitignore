@@ -40,3 +40,8 @@
 /node_modules
 /app/assets/builds/*
 !/app/assets/builds/.keep
+.package-lock-ignore
+/.package-lock-ignore
+.package-ignore
+/.package-ignore
+
