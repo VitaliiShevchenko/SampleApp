@@ -88,6 +88,7 @@
     <orderEntry type="library" scope="PROVIDED" name="fog-xml (v0.1.4, RVM: ruby-3.1.2 [rails704]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="formatador (v0.3.0, RVM: ruby-3.1.2 [rails704]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="globalid (v1.0.0, RVM: ruby-3.1.2 [rails704]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="hotwire-rails (v0.1.3, RVM: ruby-3.1.2 [rails704]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="http-accept (v1.7.0, RVM: ruby-3.1.2 [rails704]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="http-cookie (v1.0.5, RVM: ruby-3.1.2 [rails704]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="i18n (v1.12.0, RVM: ruby-3.1.2 [rails704]) [gem]" level="application" />
@@ -416,6 +417,11 @@
                 </subtasks>
               </RakeTaskImpl>
               <RakeTaskImpl description="" fullCommand="db:truncate_all" id="truncate_all" />
+            </subtasks>
+          </RakeTaskImpl>
+          <RakeTaskImpl id="hotwire">
+            <subtasks>
+              <RakeTaskImpl description="Install Hotwire into the app" fullCommand="hotwire:install" id="install" />
             </subtasks>
           </RakeTaskImpl>
           <RakeTaskImpl id="importmap">
