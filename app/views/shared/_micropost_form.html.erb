@@ -1,6 +1,4 @@
-<% content_for :head do %>
-  <%= javascript_import_module_tag "jquery" %>
-<% end %>
+
 <%= form_for(@micropost, html: { multipart: true }) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="field">
@@ -13,9 +11,9 @@
   </span>
 <% end %>
 
+<%= javascript_import_module_tag "jquery" %>
+
 <script type="text/javascript">
-    <%= javascript_importmap_tags %>
-    <%= yield(:head) %>
     $('#micropost_picture').bind('change', function() {
         size_in_megabytes = this.files[0].size/1024/1024;
         if (size_in_megabytes > 5) {
