@@ -54,8 +54,11 @@ class PasswordResetsController < ApplicationController
 
 # Подтверждает допустимость пользователя.
 def valid_user
+
+  flash[:danger] = "user=#{@user} && user.activated?=#{@user.activated?} && user.authenticated?(:reset, params[:id]=#{params[:id]})=#{@user.authenticated?(:reset, params[:id])} === #{(@user && @user.activated? && @user.authenticated?(:reset, params[:id]))}"
   unless (@user && @user.activated? && @user.authenticated?(:reset, params[:id]))
-    redirect_to root_url
+
+ redirect_to root_url
   end
 end
   # Проверяет срок действия токена.
