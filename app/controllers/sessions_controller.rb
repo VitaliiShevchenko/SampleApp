@@ -8,7 +8,7 @@
 
   def destroy
     #debugger
-
+    Rails.logger "#{current_user}"
     log_out if logged_in?
     redirect_to root_url
   end

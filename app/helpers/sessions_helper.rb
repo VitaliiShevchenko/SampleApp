@@ -41,9 +41,12 @@ module SessionsHelper
     cookies.delete(:remember_token)
   end
   def log_out
+    Rails.logger.info "!!!! current_user #{current_user} !!!"
     forget(current_user)
     session.delete(:current_user_id)
     @current_user = nil
+
+    Rails.logger.info "!!!! @current_user.nil? #{current_user} !!!"
   end
   # Перенаправить по сохраненному адресу или на страницу по умолчанию.
   def redirect_back_or(default)
