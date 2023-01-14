@@ -18,6 +18,9 @@
                 <li><%= link_to "Settings",edit_user_path(current_user) %></li>
                 <li class="dropdown-divider"></li>
                 <li><%= link_to "LOG OUT", logout_path, data: {method: :delete, confirm: "Are you sure?"} %></li>
+                <li><%= link_to "LOG OUT", logout_path, data: {turbo_method: "delete",
+                                                               turbo_confirm: "Are you sure?"} %></li>
+                <li><%= button_to "LOG OUT", logout_path, method: :delete, class: "btn btn-primary" %></li>
               </ul>
             </li>
           <% else %>
