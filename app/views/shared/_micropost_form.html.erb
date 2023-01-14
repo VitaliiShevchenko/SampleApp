@@ -1,4 +1,4 @@
-
+<%= turbo_frame_tag "micropost" do %>
 <%= form_for(@micropost, html: { multipart: true }) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="field">
@@ -9,6 +9,7 @@
   <span class="picture">
      <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
   </span>
+<% end %>
 <% end %>
 
 <% content_for :head do %>
