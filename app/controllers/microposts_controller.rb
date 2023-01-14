@@ -4,14 +4,16 @@ class MicropostsController < ApplicationController
 
   def create
     @micropost = current_user.microposts.build(micropost_params)
+    respond_to do |format|
     if @micropost.save
       flash[:success] = "Micropost created!"
       format.turbo_stream { render turbo_stream: turbo_stream.prepend(@micropost) }
-      redirect_to root_url
+      format.html         { redirect_to root_url }
     else
       flash[:danger] = "Micropost not created!"
       @feed_items = []
-      render 'static_pages/home'
+      format.html         { render 'static_pages/home' }
+    end
     end
   end
   def destroy

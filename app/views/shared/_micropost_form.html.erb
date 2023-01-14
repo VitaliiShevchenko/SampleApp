@@ -1,4 +1,6 @@
+
 <%= turbo_frame_tag "@micropost" do %>
+
 <%= form_for(@micropost, html: { multipart: true }) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="field">
