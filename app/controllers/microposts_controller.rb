@@ -6,6 +6,7 @@ class MicropostsController < ApplicationController
     @micropost = current_user.microposts.build(micropost_params)
     if @micropost.save
       flash[:success] = "Micropost created!"
+      format.turbo_stream { render turbo_stream: turbo_stream.prepend(@micropost) }
       redirect_to root_url
     else
       flash[:danger] = "Micropost not created!"
