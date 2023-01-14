@@ -1,4 +1,4 @@
-<%= turbo_frame_tag "feed_items" %>
+<%= turbo_frame_tag "feed_items" do%>
 <% if @feed_items.any? %>
   <ol class="microposts">
     <%= render @feed_items %>
@@ -7,4 +7,4 @@
     <%= will_paginate @feed_items %>
   </div>
 <% end %>
-<%= end %>
+<% end %>
