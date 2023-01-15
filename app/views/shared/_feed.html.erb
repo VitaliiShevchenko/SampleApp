@@ -2,7 +2,12 @@
 
 <% if @feed_items.any? %>
   <ol class="microposts">
+    <!--turbo-stream action="before" target="current_step">
+      <template-->
     <%= render @feed_items %>
+      <!--/template>
+    </turbo-stream-->
+    <!--%= render partial:'microposts/micropost', collection: @feed_items %-->
   </ol>
   <div class="digg_pagination">
     <%= will_paginate @feed_items %>
